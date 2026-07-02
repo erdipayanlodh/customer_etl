@@ -345,7 +345,7 @@ Computer Science Engineer | Data Engineering Enthusiast
 
 GitHub: https://github.com/erdipayanlodh
 
-LinkedIn: https://www.linkedin.com/in/YOUR_LINKEDIN/
+LinkedIn: https://www.linkedin.com/in/dipayan-lodh-855111212/
 
 ---
 
