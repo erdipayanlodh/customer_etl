@@ -183,7 +183,7 @@ SELECT * FROM CUSTOMER_DB.RAW.CUSTOMER_RAW;
 Add Screenshot:
 
 ```markdown
-![RAW Table](images/raw.png)
+![RAW Table](images/raw.png)images/raw.png
 ```
 
 ---
@@ -199,7 +199,7 @@ SELECT * FROM CUSTOMER_DB.ANALYTICS.CUSTOMERS_CLEAN;
 Add Screenshot:
 
 ```markdown
-![Analytics Table](images/cleaned.png)
+![Analytics Table](images/cleaned.png)images/cleaned.png
 ```
 
 ---
