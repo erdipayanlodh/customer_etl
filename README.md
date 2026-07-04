@@ -215,7 +215,7 @@ data/processed/customers_clean.csv
 Add Screenshot:
 
 ```markdown
-![Processed CSV](images/processed_csv.png)
+![Processed CSV](images/processed.png)
 ```
 
 ---
