@@ -164,9 +164,9 @@ customer-etl-pipeline/
 
 > Add a screenshot after pushing the project.
 
-```markdown
+
 ![Airflow DAG](images/airflow.png)
-```
+
 
 ---
 
@@ -180,9 +180,8 @@ SELECT * FROM CUSTOMER_DB.RAW.CUSTOMER_RAW;
 
 Add Screenshot:
 
-```markdown
 ![RAW Table](images/raw.png)
-```
+
 
 ---
 
@@ -196,9 +195,9 @@ SELECT * FROM CUSTOMER_DB.ANALYTICS.CUSTOMERS_CLEAN;
 
 Add Screenshot:
 
-```markdown
+
 ![Analytics Table](images/cleaned.png)
-```
+
 
 ---
 
@@ -212,9 +211,9 @@ data/processed/customers_clean.csv
 
 Add Screenshot:
 
-```markdown
+
 ![Processed CSV](images/processed.png)
-```
+
 
 ---
 ---
