@@ -160,6 +160,63 @@ customer-etl-pipeline/
 └── README.md
 ```
 
+# Airflow DAG
+
+> Add a screenshot after pushing the project.
+
+```markdown
+![Airflow DAG](images/airflow.png)
+```
+
+---
+
+# Snowflake RAW Layer
+
+Example:
+
+```sql
+SELECT * FROM CUSTOMER_DB.RAW.CUSTOMER_RAW;
+```
+
+Add Screenshot:
+
+```markdown
+![RAW Table](images/raw.png)
+```
+
+---
+
+# Snowflake Analytics Layer
+
+Example:
+
+```sql
+SELECT * FROM CUSTOMER_DB.ANALYTICS.CUSTOMERS_CLEAN;
+```
+
+Add Screenshot:
+
+```markdown
+![Analytics Table](images/cleaned.png)
+```
+
+---
+
+# Processed Dataset
+
+The pipeline exports the final cleaned dataset to:
+
+```text
+data/processed/customers_clean.csv
+```
+
+Add Screenshot:
+
+```markdown
+![Processed CSV](images/processed.png)
+```
+
+---
 ---
 
 
