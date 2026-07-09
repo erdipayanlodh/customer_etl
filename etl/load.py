@@ -60,7 +60,7 @@ def load_customers():
 
     cursor.execute("""
         SELECT COUNT(*)
-        FROM CUSTOMER_DB.RAW.CUSTOMER_RAW
+        FROM CUSTOMER_DB.BRONZE.CUSTOMER_RAW
     """)
 
     print("Rows inside Snowflake:", cursor.fetchone()[0])
