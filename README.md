@@ -18,7 +18,7 @@ Apache Airflow orchestrates the complete workflow while Docker provides a reprod
 
 ---
 
-# Architecture
+
 
 # Architecture
 
@@ -71,7 +71,7 @@ Apache Airflow orchestrates the complete workflow while Docker provides a reprod
 | Database Language | SQL |
 | Containerization | Docker |
 | Version Control | Git, GitHub |
-| Operating System | Linux |
+| Operating System | Linux (WSL)|
 | Data Source | REST API (JSONPlaceholder) |
 
 ---
@@ -106,8 +106,9 @@ Apache Airflow orchestrates the complete workflow while Docker provides a reprod
 ## Step 4 — Analytics
 
 - Create the analytics-ready Gold layer.
-- Derive customer email providers.
-- Prepare curated datasets for reporting and analysis.
+- Derive **EMAIL_PROVIDER** using SQL.
+- Prepare curated datasets for reporting and downstream analytics.
+- Store business-ready data in `GOLD.CUSTOMER_ANALYTICS`.
 
 ## Step 5 — Validate
 
@@ -116,7 +117,15 @@ Apache Airflow orchestrates the complete workflow while Docker provides a reprod
 - Export the Gold dataset to CSV.
 
 ---
+# Medallion Architecture
 
+The project follows the **Bronze → Silver → Gold** Medallion Architecture for incremental data refinement.
+
+| Layer | Purpose |
+|--------|---------|
+| Bronze | Stores raw customer records exactly as received from the source API. |
+| Silver | Cleans, standardizes, validates, and removes duplicate customer records. |
+| Gold | Creates analytics-ready datasets by enriching customer data with derived attributes such as **EMAIL_PROVIDER** for reporting and business analysis. |
 # Pipeline Flow
 
 ```text
