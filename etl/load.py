@@ -39,7 +39,7 @@ def load_customers():
 
     # Remove previous data
     cursor.execute("""
-        TRUNCATE TABLE CUSTOMER_DB.RAW.CUSTOMER_RAW
+        TRUNCATE TABLE CUSTOMER_DB.BRONZE.CUSTOMER_RAW
     """)
 
     # Insert rows
@@ -47,7 +47,7 @@ def load_customers():
 
     cursor.executemany(
         """
-        INSERT INTO CUSTOMER_DB.RAW.CUSTOMER_RAW
+        INSERT INTO CUSTOMER_DB.BRONZE.CUSTOMER_RAW
         (ID, NAME, USERNAME, EMAIL, PHONE, WEBSITE)
         VALUES (%s,%s,%s,%s,%s,%s)
         """,
