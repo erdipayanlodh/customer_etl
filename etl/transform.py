@@ -47,8 +47,8 @@ def transform_customers():
     # Verify rows
     cursor.execute("""
         SELECT COUNT(*)
-        FROM CUSTOMER_DB.ANALYTICS.CUSTOMERS_CLEAN
-    """)
+        FROM CUSTOMER_DB.GOLD.CUSTOMER_ANALYTICS
+    """)    
 
     rows = cursor.fetchone()[0]
 
@@ -60,7 +60,7 @@ def transform_customers():
 
     cursor.execute("""
         SELECT *
-        FROM CUSTOMER_DB.ANALYTICS.CUSTOMERS_CLEAN
+        FROM CUSTOMER_DB.GOLD.CUSTOMER_ANALYTICS
     """)
 
     data = cursor.fetchall()

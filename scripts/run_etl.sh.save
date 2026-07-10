@@ -1,0 +1,26 @@
+
+
+
+echo "======================================="
+echo "Starting Customer ETL Pipeline"
+echo "======================================="
+
+echo "Checking Docker..."
+docker compose ps
+
+echo "Triggering Airflow DAG..."
+docker exec airflow-airflow-webserver-1 airflow dags trigger customer_etl_pipeline
+
+echo "ETL Pipeline Triggered Successfully!"
+
+echo "======================================="
+echo "Starting Customer ETL Pipeline"
+echo "======================================="
+
+echo "Checking Docker..."
+docker compose ps
+
+echo "Triggering Airflow DAG..."
+docker exec airflow-airflow-webserver-1 airflow dags trigger customer_etl_pipeline
+
+echo "ETL Pipeline Triggered Successfully!"

@@ -10,14 +10,15 @@
 ---
 
 # Project Overview
-
 This project demonstrates an **End-to-End ETL (Extract, Transform, Load) Pipeline** built using **Python, Apache Airflow, Snowflake, SQL, Docker, and REST APIs**.
 
-The pipeline automatically extracts customer data from a public REST API, stores the raw data locally, loads it into Snowflake, performs SQL-based transformations to create analytics-ready datasets, validates the processed data, and exports the final cleaned dataset.
+The pipeline extracts customer data from a public REST API, stages it in the **Bronze layer**, performs data cleansing and standardization in the **Silver layer**, enriches the data into an **analytics-ready Gold layer**, validates the transformed data, and exports the processed dataset for downstream analytics.
 
-Apache Airflow orchestrates the complete workflow, while Docker provides a reproducible and isolated execution environment.
+Apache Airflow orchestrates the complete workflow while Docker provides a reproducible execution environment. The project follows the **Medallion Architecture (Bronze → Silver → Gold)** commonly used in modern Data Engineering.
 
 ---
+
+
 
 # Architecture
 
@@ -28,25 +29,33 @@ Apache Airflow orchestrates the complete workflow, while Docker provides a repro
              Python Extraction
                        │
                        ▼
-             Raw JSON / CSV Files
+            Raw JSON / CSV Files
                        │
                        ▼
-              Apache Airflow DAG
+            Apache Airflow Pipeline
                        │
                        ▼
-          Snowflake RAW Layer
+      Snowflake Bronze Layer
+     (BRONZE.CUSTOMER_RAW)
                        │
                        ▼
-         SQL Data Transformation
+       SQL Data Cleaning &
+      Standardization
                        │
                        ▼
-      Snowflake ANALYTICS Layer
+      Snowflake Silver Layer
+   (SILVER.CUSTOMER_CLEAN)
                        │
                        ▼
-          Data Validation & Export
+   Business Transformations
+  (Email Provider Extraction)
                        │
                        ▼
-          Processed Customer CSV
+      Snowflake Gold Layer
+ (GOLD.CUSTOMER_ANALYTICS)
+                       │
+                       ▼
+ Validation & Processed CSV Export
 ```
 
 ---
@@ -62,7 +71,7 @@ Apache Airflow orchestrates the complete workflow, while Docker provides a repro
 | Database Language | SQL |
 | Containerization | Docker |
 | Version Control | Git, GitHub |
-| Operating System | Linux |
+| Operating System | Linux (WSL)|
 | Data Source | REST API (JSONPlaceholder) |
 
 ---
@@ -79,45 +88,60 @@ Apache Airflow orchestrates the complete workflow, while Docker provides a repro
 
 ## Step 2 — Load
 
-- Read the raw CSV file.
-- Connect to Snowflake using Airflow's Snowflake Hook.
-- Load customer records into the **RAW** schema.
+- Read the extracted CSV file.
+- Load raw customer records into the **Bronze** schema in Snowflake.
+- Preserve source data for auditing and traceability.
 
 ---
 
 ## Step 3 — Transform
 
-- Execute SQL transformation scripts.
 - Clean and standardize customer data.
-- Create analytics-ready tables in the **ANALYTICS** schema.
+- Remove duplicate records.
+- Normalize names and email addresses.
+- Populate the **Silver** schema.
 
 ---
 
-## Step 4 — Validate
+## Step 4 — Analytics
+
+- Create the analytics-ready Gold layer.
+- Derive **EMAIL_PROVIDER** using SQL.
+- Prepare curated datasets for reporting and downstream analytics.
+- Store business-ready data in `GOLD.CUSTOMER_ANALYTICS`.
+
+## Step 5 — Validate
 
 - Verify row counts.
-- Check for duplicate customer IDs.
-- Confirm successful transformation.
-- Export the processed dataset as CSV.
+- Validate successful data loading.
+- Export the Gold dataset to CSV.
 
 ---
+# Medallion Architecture
 
+The project follows the **Bronze → Silver → Gold** Medallion Architecture for incremental data refinement.
+
+| Layer | Purpose |
+|--------|---------|
+| Bronze | Stores raw customer records exactly as received from the source API. |
+| Silver | Cleans, standardizes, validates, and removes duplicate customer records. |
+| Gold | Creates analytics-ready datasets by enriching customer data with derived attributes such as **EMAIL_PROVIDER** for reporting and business analysis. |
 # Pipeline Flow
 
 ```text
 Extract Customers
         │
         ▼
-Load into Snowflake
+Load Bronze Layer
         │
         ▼
-Transform Data
+Transform to Silver
         │
         ▼
-Validate Data
+Transform to Gold
         │
         ▼
-Export Processed CSV
+Validate & Export
 ```
 
 ---
@@ -170,12 +194,12 @@ customer-etl-pipeline/
 
 ---
 
-# Snowflake RAW Layer
+# Snowflake BRONZE Layer
 
 Example:
 
 ```sql
-SELECT * FROM CUSTOMER_DB.RAW.CUSTOMER_RAW;
+SELECT * FROM CUSTOMER_DB.BRONZE.CUSTOMER_RAW;
 ```
 
 Add Screenshot:
@@ -184,19 +208,25 @@ Add Screenshot:
 
 
 ---
-
-# Snowflake Analytics Layer
-
-Example:
+# Snowflake Silver Layer
 
 ```sql
-SELECT * FROM CUSTOMER_DB.ANALYTICS.CUSTOMERS_CLEAN;
+SELECT * FROM CUSTOMER_DB.SILVER.CUSTOMER_CLEAN;
 ```
 
-Add Screenshot:
+Add Screenshot
 
+![Silver](images/silver.png)
 
-![Analytics Table](images/cleaned.png)
+# Snowflake Gold Layer
+
+```sql
+SELECT * FROM CUSTOMER_DB.GOLD.CUSTOMER_ANALYTICS;
+```
+
+Add Screenshot
+
+![Gold](images/gold.png)
 
 
 ---
@@ -222,13 +252,16 @@ Add Screenshot:
 # Features
 
 - End-to-End ETL Pipeline
+- Medallion Architecture (Bronze–Silver–Gold)
 - Apache Airflow Workflow Orchestration
 - Snowflake Data Warehouse Integration
-- Modular Python ETL Scripts
 - SQL-based Data Transformation
+- Customer Data Standardization
+- Email Provider Analytics
 - Automated Data Validation
 - Processed CSV Export
 - Dockerized Development Environment
+- Modular Python Architecture
 - Scalable Project Structure
 
 ---
@@ -299,7 +332,13 @@ After successful execution:
 
 ✔ Raw data loaded into Snowflake
 
-✔ Analytics table created
+✔ Bronze layer loaded
+
+✔ Silver layer created
+
+✔ Gold analytics layer generated
+
+✔ Processed analytics CSV exported
 
 ✔ Data validated
 
@@ -311,12 +350,8 @@ After successful execution:
 
 - Integrate dbt for SQL transformations
 - Implement CI using GitHub Actions
-- Add Incremental Data Loading
-- Integrate AWS S3
-- Add Data Quality Tests
-- Build a Monitoring Dashboard
-- Parameterize the Airflow DAG
-- Deploy using Kubernetes
+- Integrate Azure Blob Storage
+
 
 ---
 

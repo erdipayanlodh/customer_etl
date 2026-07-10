@@ -69,6 +69,7 @@ def extract_customers():
     print("JSON Saved:", json_path)
 
     return csv_path
+    
 
 
 if __name__ == "__main__":
