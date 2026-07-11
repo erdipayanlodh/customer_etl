@@ -251,7 +251,7 @@ Add Screenshot:
 
 ### WSL Terminal
 
-![Linux Terminal](images/linux_terminal.png)
+![Linux Terminal](https://github.com/erdipayanlodh/customer_etl/blob/0e27266f034b95bbfadbd8a7759db354ea088316/images/linux-scripts.png)
 
 
 
