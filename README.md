@@ -247,6 +247,12 @@ Add Screenshot:
 
 ---
 ---
+# Linux Execution
+
+### WSL Terminal
+
+![Linux Terminal](images/linux_terminal.png)
+
 
 
 # Features
