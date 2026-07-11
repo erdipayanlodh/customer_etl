@@ -216,7 +216,7 @@ SELECT * FROM CUSTOMER_DB.SILVER.CUSTOMER_CLEAN;
 
 Add Screenshot
 
-![Silver](images/silver.png)
+![Silver](https://github.com/erdipayanlodh/customer_etl/blob/adbab3c82daf7be3beabcf08cd71b929cbb64a74/images/SILVER.png)
 
 # Snowflake Gold Layer
 
