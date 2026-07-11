@@ -226,7 +226,7 @@ SELECT * FROM CUSTOMER_DB.GOLD.CUSTOMER_ANALYTICS;
 
 Add Screenshot
 
-![Gold](images/gold.png)
+![Gold](https://github.com/erdipayanlodh/customer_etl/blob/326b2945bf7ddd1675671bc4d6d6895583f0b3eb/images/GOLD.png)
 
 
 ---
